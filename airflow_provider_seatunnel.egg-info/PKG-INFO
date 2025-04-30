@@ -13,12 +13,14 @@ Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
-Classifier: License :: OSI Approved :: Apache Software License
+Classifier: License :: OSI Approved :: Apache Software Licens
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.7
 Description-Content-Type: text/markdown
+License-File: LICENSE
 Requires-Dist: apache-airflow>=2.3.0
 Requires-Dist: requests>=2.25.0
+Dynamic: license-file
 
 # Apache Airflow Provider for Apache SeaTunnel
 
@@ -29,7 +31,7 @@ This package provides an Apache Airflow provider for [Apache SeaTunnel](https://
 You can install this provider package using pip:
 
 ```bash
-pip install airflow-provider-seatunnel
+pip install -e .
 ```
 
 ## Features
