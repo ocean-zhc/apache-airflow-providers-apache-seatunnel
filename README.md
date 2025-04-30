@@ -7,7 +7,7 @@ This package provides an Apache Airflow provider for [Apache SeaTunnel](https://
 You can install this provider package using pip:
 
 ```bash
-pip install airflow-provider-seatunnel
+pip install -e .
 ```
 
 ## Features
