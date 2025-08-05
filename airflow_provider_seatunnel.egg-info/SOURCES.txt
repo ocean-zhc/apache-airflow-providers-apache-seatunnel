@@ -3,6 +3,7 @@ MANIFEST.in
 README.md
 pyproject.toml
 setup.py
+./airflow_seatunnel_provider/__init__.py
 airflow_provider_seatunnel.egg-info/PKG-INFO
 airflow_provider_seatunnel.egg-info/SOURCES.txt
 airflow_provider_seatunnel.egg-info/dependency_links.txt

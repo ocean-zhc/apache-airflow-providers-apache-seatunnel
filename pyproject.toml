@@ -19,13 +19,19 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    "License :: OSI Approved :: Apache Software Licens",
+    "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
 ]
 dependencies = [
     "apache-airflow>=2.3.0",
     "requests>=2.25.0",
 ]
+
+[tool.setuptools]
+packages = ["airflow_seatunnel_provider"]
+
+[tool.setuptools.package-dir]
+"" = "."
 
 [project.urls]
 "Homepage" = "https://seatunnel.apache.org/"

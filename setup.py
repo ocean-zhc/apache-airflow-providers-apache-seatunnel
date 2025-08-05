@@ -1,5 +1,5 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
-setup()
-
-license="License :: OSI Approved :: Apache Software License",
+setup(
+    packages=find_packages(include=['airflow_seatunnel_provider', 'airflow_seatunnel_provider.*']),
+)

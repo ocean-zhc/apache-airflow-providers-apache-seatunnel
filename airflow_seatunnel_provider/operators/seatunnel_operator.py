@@ -32,6 +32,11 @@ class SeaTunnelOperator(BaseOperator):
         
         if (config_file is None and config_content is None) or (config_file is not None and config_content is not None):
             raise ValueError("Either config_file or config_content must be provided, but not both.")
+        
+        # Validate engine type
+        valid_engines = ["flink", "spark", "zeta"]
+        if engine not in valid_engines:
+            raise ValueError(f"Invalid engine '{engine}'. Must be one of: {valid_engines}")
             
         self.config_file = config_file
         self.config_content = config_content

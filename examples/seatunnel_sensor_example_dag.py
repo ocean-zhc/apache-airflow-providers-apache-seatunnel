@@ -15,14 +15,14 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
-# 定义用于从命令输出中提取job_id的函数
+# Define a function to extract job_id from command output
 def extract_job_id(**kwargs):
-    # 从XCom中获取SeaTunnel任务的输出
+    # Get SeaTunnel Task Output from XCom
     seatunnel_output = kwargs['ti'].xcom_pull(task_ids='start_seatunnel_job')
-    
-    # 使用正则表达式寻找job_id，这个模式需要根据实际输出格式调整
-    # 示例正则表达式，假设job_id是以"Job id:"或"Job ID:"或类似格式出现的
-    # 也可能是"Job xxx successfully started"格式
+
+    # Use regular expressions to find job_id, this pattern needs to be adjusted according to the actual output format
+    # Example regular expressions, assuming job_id appears in a format like "Job id:" or "Job ID:" or similar
+    # Or it could be in the format "Job xxx successfully started"
     job_id_pattern = r'[Jj]ob\s+(?:[Ii][Dd]:\s*)?([a-zA-Z0-9-]+)'
     
     match = re.search(job_id_pattern, seatunnel_output)
@@ -31,7 +31,7 @@ def extract_job_id(**kwargs):
         print(f"Extracted job ID: {job_id}")
         return job_id
     else:
-        # 如果无法提取job_id，则返回一个默认的错误信息
+        # If unable to extract job_id, return a default error message
         error_msg = "Could not extract job ID from SeaTunnel output"
         print(error_msg)
         raise ValueError(error_msg)
@@ -82,13 +82,13 @@ sink {
         seatunnel_conn_id='seatunnel_default',
     )
     
-    # 添加任务来提取job_id
+    # Add task to extract job_id
     extract_id = PythonOperator(
         task_id='extract_job_id',
         python_callable=extract_job_id,
     )
     
-    # 使用提取的job_id来监控
+    # Monitor using the extracted job_id
     wait_for_job = SeaTunnelJobSensor(
         task_id='wait_for_job_completion',
         job_id="{{ task_instance.xcom_pull(task_ids='extract_job_id') }}",  # 使用提取后的job_id

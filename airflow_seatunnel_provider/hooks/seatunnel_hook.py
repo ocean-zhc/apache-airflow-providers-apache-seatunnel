@@ -71,6 +71,10 @@ class SeaTunnelHook(BaseHook):
         if engine not in ["flink", "spark", "zeta"]:
             raise AirflowException(f"Unsupported engine: {engine}. Must be one of 'flink', 'spark', or 'zeta'.")
         
+        # Check config file first
+        if not os.path.isfile(config_file):
+            raise AirflowException(f"Config file not found at: {config_file}")
+        
         # Determine the script to use based on the engine
         script_name = {
             "flink": "start-seatunnel-flink-connector-v2.sh",
@@ -82,9 +86,6 @@ class SeaTunnelHook(BaseHook):
         
         if not os.path.isfile(script_path):
             raise AirflowException(f"SeaTunnel script not found at: {script_path}")
-        
-        if not os.path.isfile(config_file):
-            raise AirflowException(f"Config file not found at: {config_file}")
         
         # Prepare the command
         if engine == "zeta":
